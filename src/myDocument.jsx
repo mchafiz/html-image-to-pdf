@@ -4,11 +4,10 @@ import { Document, Page, Image, StyleSheet } from "@react-pdf/renderer";
 const PDFComponent = ({ tableImage }) => {
   return (
     <Document>
-      <Page orientation="landscape">
-        <Image src={tableImage} style={styles.image} />
-      </Page>
-      <Page orientation="landscape">
-        <Image src={tableImage} style={styles.image} />
+      <Page orientation="landscape" size="A4" style={styles.page}>
+        {tableImage.map((image) => {
+          return <Image src={image} style={styles.image} key={image} />;
+        })}
       </Page>
     </Document>
   );
@@ -16,7 +15,12 @@ const PDFComponent = ({ tableImage }) => {
 
 const styles = StyleSheet.create({
   image: {
-    width: "100%",
+    width: "auto",
+    height: "auto",
+    margin: 25,
+  },
+  page: {
+    margin: 5,
   },
 });
 
